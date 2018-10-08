@@ -78,6 +78,8 @@ module Creek
         # Looks for one of ymdhis outside of meta-stuff like [Red]
         return :date_time if string =~ /(^|\])[^\[]*[ymdhis]/i
         return :currency if string.starts_with?('[$$-')
+        return :currency if string.starts_with?('"$"#')
+        return :currency if string[/^([^\d\s]{1,}\s?[+-]?)(\d{1,3})(\,\d{3})*(\.\d{1,})?$/]
 
         return :unsupported
       end
