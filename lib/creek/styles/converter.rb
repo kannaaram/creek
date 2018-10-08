@@ -56,12 +56,14 @@ module Creek
 
         when :string
           value
+        when :currency
+          ActionController::Base.helpers.number_to_currency(value.to_f.round, precision: 2)
         when :unsupported
           convert_unknown(value)
         when :fixnum
           value.to_i
         when :float, :percentage
-          value.to_f
+          ActionController::Base.helpers.number_to_percentage(value.to_f, precision: 2)
         when :date
           convert_date(value, options)
         when :time, :date_time
@@ -74,7 +76,7 @@ module Creek
           convert_unknown(value)
         end
       end
-      
+
       def self.convert_unknown(value)
         begin
           if value.nil? or value.empty?
@@ -114,15 +116,15 @@ module Creek
 
       private
 
-        def self.base_date(options)
-          options.fetch(:base_date, Date.new(1899, 12, 30))
-        end
+      def self.base_date(options)
+        options.fetch(:base_date, Date.new(1899, 12, 30))
+      end
 
-        def self.round_datetime(datetime_string)
-          /(?<yyyy>\d+)-(?<mm>\d+)-(?<dd>\d+) (?<hh>\d+):(?<mi>\d+):(?<ss>\d+.\d+)/ =~ datetime_string
+      def self.round_datetime(datetime_string)
+        /(?<yyyy>\d+)-(?<mm>\d+)-(?<dd>\d+) (?<hh>\d+):(?<mi>\d+):(?<ss>\d+.\d+)/ =~ datetime_string
 
-          ::Time.new(yyyy.to_i, mm.to_i, dd.to_i, hh.to_i, mi.to_i, ss.to_r).round(0)
-        end
+        ::Time.new(yyyy.to_i, mm.to_i, dd.to_i, hh.to_i, mi.to_i, ss.to_r).round(0)
+      end
     end
   end
 end

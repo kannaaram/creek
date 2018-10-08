@@ -8,10 +8,10 @@ module Creek
         2  => :float,          # 0.00
         3  => :fixnum,         # #,##0
         4  => :float,          # #,##0.00
-        5  => :unsupported,    # $#,##0_);($#,##0)
-        6  => :unsupported,    # $#,##0_);[Red]($#,##0)
-        7  => :unsupported,    # $#,##0.00_);($#,##0.00)
-        8  => :unsupported,    # $#,##0.00_);[Red]($#,##0.00)
+        5  => :currency,       # $#,##0_);($#,##0)
+        6  => :currency,       # $#,##0_);[Red]($#,##0)
+        7  => :currency,       # $#,##0.00_);($#,##0.00)
+        8  => :currency,       # $#,##0.00_);[Red]($#,##0.00)
         9  => :percentage,     # 0%
         10 => :percentage,     # 0.00%
         11 => :bignum,         # 0.00E+00
